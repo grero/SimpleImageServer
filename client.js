@@ -1,10 +1,10 @@
-webSocket = new WebSocket(url, protocols);
+webSocket = new WebSocket("ws://localhost:2067", "Protocol1");
 
 
 webSocket.onmessage = (event) => {
    var url = event.data;
   const img = document.getElementById("image");
-  f.href = url;
+  f.src = url;
   
   console.log(event.data);
 };
