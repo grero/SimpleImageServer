@@ -1,5 +1,4 @@
-webSocket = new WebSocket("ws://localhost:2067", "Protocol1");
-
+webSocket = new WebSocket("ws://localhost:8765", "Protocol1");
 
 webSocket.onmessage = (event) => {
    var url = event.data;
