@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>test</title>
+    </head>
+
+    <body>
+        <script>
+            webSocket = new WebSocket("ws://localhost:8765", "Protocol1");
+
+            webSocket.onmessage = (event) => {
+                const img = document.getElementById("image");
+                const blob = event.data;
+                blob.text().then((t) => {
+                    img.src = "data:image/png;base64," + t;
+                    })
+            };
+        </script>
+        This is an image:
+        <img src="" id="image" width=500 height=500>
+    </body>
+</html>

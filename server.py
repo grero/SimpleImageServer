@@ -1,12 +1,22 @@
 import asyncio
 import websockets
+import time
+import random
+import numpy as np
+import base64
+
+image_urls = ["/Users/roger/Downloads/radom-clipart-14.jpg.png",
+              "/Users/roger/Downloads/333-3331136_cartoon-clipart-png-download-random-object-battle-royal.png"]
+
+images = [base64.b64encode(open(img,"rb").read()) for img in image_urls]
 
 async def handle_websocket(websocket, path):
     try:
         while True:
-            response = f"Received"
-            url = "http://localhost/images/image1.png"
-            await websocket.send(url)
+            r = int(np.round(random.random()))
+            print(images[r][:10])
+            await websocket.send(images[r])
+            time.sleep(1.0)
           
     except websockets.ConnectionClosed:
         pass
