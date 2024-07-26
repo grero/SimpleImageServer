@@ -4,17 +4,21 @@ import time
 import random
 import numpy as np
 import base64
+import glob
 
-image_urls = ["/Users/roger/Downloads/radom-clipart-14.jpg.png",
-              "/Users/roger/Downloads/333-3331136_cartoon-clipart-png-download-random-object-battle-royal.png"]
+def get_images():
+    img_files = glob.glob("*.png")
+    img_files.extend(glob.glob("*.jpg"))
+    images = [base64.b64encode(open(img,"rb").read()) for img in img_files]
+    return images
 
-images = [base64.b64encode(open(img,"rb").read()) for img in image_urls]
+
+images = get_images()
 
 async def handle_websocket(websocket, path):
     try:
         while True:
             r = int(np.round(random.random()))
-            print(images[r][:10])
             await websocket.send(images[r])
             time.sleep(1.0)
           
